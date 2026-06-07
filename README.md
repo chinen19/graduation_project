@@ -432,3 +432,5 @@ LINE、メールで買うもの共有
 
 ## 画面遷移図
 https://www.figma.com/design/XUyqkkQcbMnVVEaoGDZLEH/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%E4%BD%9C%E6%88%90%E3%83%AF%E3%83%BC%E3%82%AF--%E3%82%B3%E3%83%94%E3%83%BC-?node-id=0-1&p=f&t=C0zHNWkVj6dTRBi4-0
+
+
