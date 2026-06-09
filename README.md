@@ -433,4 +433,4 @@ https://www.figma.com/design/XUyqkkQcbMnVVEaoGDZLEH/%E7%94%BB%E9%9D%A2%E9%81%B7%
 
 
 ## ER図
-[![Image from Gyazo](https://i.gyazo.com/7c1f297a741ff5172c8743d93c5118f4.png)](https://gyazo.com/7c1f297a741ff5172c8743d93c5118f4)
+[![Image from Gyazo](https://i.gyazo.com/4bfcead9fa51ddf9316a394d744c62b8.png)](https://gyazo.com/4bfcead9fa51ddf9316a394d744c62b8)
