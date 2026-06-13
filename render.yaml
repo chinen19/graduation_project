@@ -1,20 +1,20 @@
 services:
   - type: web
-    name: graduation-project-web  # アプリ名(ハイフン区切り推奨)
+    name: graduation-project-web
     env: ruby
     plan: free
     buildCommand: bundle install; bundle exec rails assets:precompile; bundle exec rails db:migrate
     startCommand: bundle exec rails server -b 0.0.0.0 -p $PORT
     envVars:
-      - key: RAILS_MASTER_KEY
+      - key: RAILS_MASTER_KEY 
         sync: false
+        value: abe1f21da6da69cd67532762aa341c5b
       - key: DATABASE_URL
-        fromDatabase:
-          name: graduation-project-db  # データベース名
-          property: connectionString
+        value: postgresql://graduation_project_production_nhbd_user:okOzSzVMrtYRxYYn9qcco9IFQToJA7TL@dpg-d8mcklgjs32c73cgtuvg-a/graduation_project_production_nhbd  # ← fromDatabase を削除して value に変更
 
-databases:
-  - name: graduation-project-db  # データベース名(上記と同じ)
-    plan: free
-    databaseName: graduation_project_production  # データベースの実際の名前
-    user: graduation_project_user  # データベースユーザー名
+# databases セクションはコメントアウトまたは削除
+# databases:
+#   - name: graduation-project-db
+#     plan: free
+#     databaseName: graduation_project_production
+#     user: graduation_project_user

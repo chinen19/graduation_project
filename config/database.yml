@@ -85,4 +85,5 @@ test:
 #
 production:
   <<: *default
+  database: graduation_project_production
   url: <%= ENV['DATABASE_URL'] %>
