@@ -2,6 +2,7 @@ services:
   - type: web
     name: graduation-project-web  # アプリ名(ハイフン区切り推奨)
     env: ruby
+    plan: free
     buildCommand: bundle install; bundle exec rails assets:precompile; bundle exec rails db:migrate
     startCommand: bundle exec rails server -b 0.0.0.0 -p $PORT
     envVars:
@@ -14,5 +15,6 @@ services:
 
 databases:
   - name: graduation-project-db  # データベース名(上記と同じ)
+    plan: free
     databaseName: graduation_project_production  # データベースの実際の名前
     user: graduation_project_user  # データベースユーザー名
