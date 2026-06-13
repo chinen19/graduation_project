@@ -1,0 +1,33 @@
+<h1>ユーザー登録</h1>
+
+<%= form_with model: @user, local: true do |f| %>
+<%# form_with入力フォームを作成するためのヘルパーメソッド。model: @user と指定するだけで、「新規作成ならこのURL（POST）」「編集ならこのURL（PATCH）」と、適切な送信先を自動で判断 %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+        <%# エラーがない時は何も表示せず、エラーがある時だけ警告文を表示する %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :user_name, 'ユーザー名' %>
+    <%= f.text_field :user_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, 'メールアドレス' %>
+    <%= f.email_field :email, class: 'form-control' %>
+    <%# f.email_fiel:dユーザーがデータを入力する箱 %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password, 'パスワード' %>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
+
+  <%= f.submit '登録', class: 'btn btn-primary' %>
+<% end %>
