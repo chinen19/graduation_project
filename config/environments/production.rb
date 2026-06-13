@@ -22,13 +22,18 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
+  # 静的ファイルの配信を有効化
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
-
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
+  # アセットのコンパイルを有効化
   config.assets.compile = false
+
+  # ホストを許可（Renderのホスト名を追加）
+  # ※ 後でRenderで設定するアプリ名に合わせて変更します
+  config.hosts << ".onrender.com"
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
