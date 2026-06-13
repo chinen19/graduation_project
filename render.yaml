@@ -1,1 +1,18 @@
-buildCommand: bundle install; bundle exec rails assets:precompile; bundle exec rails db:migrate
+services:
+  - type: web
+    name: graduation-project-web  # アプリ名(ハイフン区切り推奨)
+    env: ruby
+    buildCommand: bundle install; bundle exec rails assets:precompile; bundle exec rails db:migrate
+    startCommand: bundle exec rails server -b 0.0.0.0 -p $PORT
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: graduation-project-db  # データベース名
+          property: connectionString
+
+databases:
+  - name: graduation-project-db  # データベース名(上記と同じ)
+    databaseName: graduation_project_production  # データベースの実際の名前
+    user: graduation_project_user  # データベースユーザー名
