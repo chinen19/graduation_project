@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>App</title>
+    <title>GraduationProject</title>
+    <!-- meta name="viewport" content="..."画面幅を適切に合わせるための設定 -->
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- セキュリティ対策（CSRF対策）用のタグを自動生成 -->
     <%= csrf_meta_tags %>
+    <!-- コンテンツセキュリティポリシー（CSP）用のタグを生成 -->
     <%= csp_meta_tag %>
 
+    <!-- アプリ全体のCSSを読み込む -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <!-- フラッシュメッセージを表示 -->
+    <% if flash[:success] %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= flash[:success] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+
+    <% if flash[:danger] %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= flash[:danger] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+
+    <!-- コントローラーから呼び出された個別のページが、この位置に丸ごと差し込まれru
+     -->
     <%= yield %>
   </body>
 </html>

@@ -3,25 +3,26 @@
     <div class="col-md-6 offset-md-3">
       <h1 class="text-center mb-4">ログイン</h1>
 
-      <%= form_with url: login_path, method: :post, local: true do |f| %>
-        <div class="mb-3">
+      <%= form_with url: login_path, local: true do |f| %>
+        <div class="form-field">
           <%= f.label :email, "メールアドレス", class: "form-label" %>
-          <%= f.email_field :email, class: "form-control", placeholder: "example@example.com" %>
+          <%= f.email_field :email, class: "form-input" %>
         </div>
 
-        <div class="mb-3">
+        <div class="form-field">
           <%= f.label :password, "パスワード", class: "form-label" %>
-          <%= f.password_field :password, class: "form-control", placeholder: "パスワードを入力" %>
+          <%= f.password_field :password, class: "form-input" %>
         </div>
 
-        <div class="d-grid">
-          <%= f.submit "ログイン", class: "btn btn-primary" %>
+        <div class="form-actions">
+          <%= f.submit "ログイン", class: "btn-primary" %>
         </div>
       <% end %>
 
       <div class="text-center mt-3">
-        <p>アカウントをお持ちでない方は <%= link_to "こちら", new_user_path %></p>
+        <%= link_to "新規登録", new_user_path %>
       </div>
     </div>
   </div>
 </div>
+
