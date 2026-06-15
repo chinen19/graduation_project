@@ -33,3 +33,39 @@
   background-color: #f8d7da;
   border-color: #f5c6cb;
 }
+
+/* ヘッダーのスタイル */
+header {
+  background-color: #808080; /* 灰色 */
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px; /* 角を丸くする */
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* リンクやテキストの色を白に設定（灰色背景に合わせて） */
+header nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+header nav span {
+  color: white;
+  margin-right: 15px;
+}
+
+/* アプリ名を少し大きく太字に */
+header nav a:first-child {
+  font-size: 1.5rem;
+  font-weight: bold;
+}

@@ -1,0 +1,14 @@
+<header>
+  <nav>
+    <%= link_to '簡単整理アプリ', root_path %>
+    
+     <!-- ユーザーがログインしているかどうか」を判定するメソッド -->
+    <% if logged_in? %>
+      <span>ようこそ、<%= current_user.user_name %>さん!</span>
+      <%= link_to 'ログアウト', logout_path, data: { turbo_method: :delete } %>
+    <% else %>
+      <%= link_to 'ログイン', login_path %>
+      <%= link_to '新規登録', new_user_path %>
+    <% end %>
+  </nav>
+</header>

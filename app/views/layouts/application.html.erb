@@ -11,6 +11,8 @@
   </head>
 
   <body>
+    <!-- app/views/shared/_header.html.erbを読み込む -->
+    <%= render 'shared/header' %>
     <!-- フラッシュメッセージを表示 -->
     <% flash.each do |message_type, message| %>
       <div class="alert alert-<%= message_type %>">
