@@ -13,6 +13,33 @@
  *= require_tree .
  *= require_self
  */
+
+/* カテゴリの横スクロール */
+.category-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.category-item {
+  flex: 0 0 auto;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.category-item:hover {
+  background-color: #e0e0e0;
+}
+
+.category-item.active {
+  background-color: #007bff;
+  color: white;
+}
 /* フラッシュメッセージのスタイル */
 .alert {
   padding: 15px;

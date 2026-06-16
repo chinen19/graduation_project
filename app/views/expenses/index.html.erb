@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>収支一覧</h1>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>日付</th>
+        <th>カテゴリ</th>
+        <th>内容</th>
+        <th>金額</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @expenses.each do |expense| %>
+        <tr>
+          <td><%= expense.date %></td>
+          <td><%= expense.category.name %></td>
+          <td><%= expense.description %></td>
+          <td><%= number_to_currency(expense.amount) %></td>
+          <td>
+            <%= link_to '詳細', expense_path(expense), class: 'btn btn-sm btn-info' %>
+            <%= link_to '削除', expense_path(expense), method: :delete, data: { confirm: '本当に削除しますか?' }, class: 'btn btn-sm btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -7,13 +7,13 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>  <!-- ← inter-font を削除 -->
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <!-- app/views/shared/_header.html.erbを読み込む -->
     <%= render 'shared/header' %>
-    <!-- フラッシュメッセージを表示 -->
+    
     <% flash.each do |message_type, message| %>
       <div class="alert alert-<%= message_type %>">
         <%= message %>
@@ -21,5 +21,30 @@
     <% end %>
 
     <%= yield %>
+
+    <script>
+  // Turbo Frame にコンテンツが読み込まれたらモーダルを表示
+  // document.addEventListener('turbo:frame-load', function(event) {
+  //   if (event.target.id === 'modal') {
+  //     const modalContainer = event.target;
+  //     if (modalContainer && modalContainer.innerHTML.trim() !== '') {
+  //       modalContainer.classList.remove('hidden');
+  //       modalContainer.classList.add('flex');
+  //     }
+  //   }
+  // });
+
+  // 背景クリックでモーダルを閉じる
+  // document.addEventListener('click', function(event) {
+  //   const modal = document.querySelector('turbo-frame#modal');
+  //   if (modal && event.target === modal) {
+  //     modal.classList.add('hidden');
+  //     modal.classList.remove('flex');
+  //     // モーダルの中身を空にする
+  //     modal.innerHTML = '<div class="bg-white rounded-lg shadow-lg max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto"></div>';
+  //   }
+  // });
+  </script>
   </body>
 </html>
+
