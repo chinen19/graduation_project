@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   #ストロングパラメーター
 
   def user_params
-    params.require(:user).permit(:user_name, :email, :password)
-    #params の中から "user"というキーを探す。permitで:user_name, :email, :password, :password_confirmation飲みチェック
+    params.require(:user).permit(:user_name, :email, :password, :password_confirmation)
+    #params の中から "user"というキーを探す。permitで:user_name, :email, :password, :password_confirmationのみチェック
   end
 end
