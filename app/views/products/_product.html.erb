@@ -1,0 +1,17 @@
+<div id="product-<%= product.id %>" class="bg-white p-4 rounded-lg shadow-md">
+  <h3 class="text-xl font-bold mb-2"><%= product.name %></h3>
+  <p class="text-sm text-gray-600 mb-1">カテゴリー: <%= product.category.name %></p>
+  <p class="text-sm text-gray-600 mb-1">評価: <%= '★' * product.rating.to_i %><%= '☆' * (5 - product.rating.to_i) %></p>
+  <p class="text-sm text-gray-600 mb-3">メモ: <%= product.comment %></p>
+  <div class="flex gap-2">
+    <%= link_to '詳細', product_path(product), 
+        data: { turbo_frame: "modal" }, 
+        class: 'text-blue-500 hover:underline text-sm' %>
+    <%= link_to '編集', edit_product_path(product), 
+        data: { turbo_frame: "modal" }, 
+        class: 'text-yellow-500 hover:underline text-sm' %>
+    <%= link_to '削除', product_path(product), 
+        data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, 
+        class: 'text-red-500 hover:underline text-sm' %>
+  </div>
+</div>

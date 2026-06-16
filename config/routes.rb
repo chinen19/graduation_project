@@ -3,13 +3,17 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  # ルートページ（トップページ）
-  root 'static_pages#top'
+  # ルートページ（トップページでメモ一覧を表示）
+  root 'products#index'
 
   # ログイン関連
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
+
+  resources :expenses
+  resources :products
+  resources :categories, only: [:index]
 
   # ユーザー登録
   resources :users, only: [:new, :create]

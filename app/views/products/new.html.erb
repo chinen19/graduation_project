@@ -1,0 +1,94 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">メモを作成</h1>
+
+  <!-- メモ作成フォーム -->
+  <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+    <%= form_with model: @product, url: products_path, local: true, class: "space-y-4" do |f| %>
+      
+      <!-- エラーメッセージ -->
+      <% if @product.errors.any? %>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          <ul>
+            <% @product.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <!-- 商品名 -->
+      <div>
+        <%= f.label :name, "商品名", class: "block text-sm font-bold mb-2" %>
+        <%= f.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded-lg", placeholder: "商品名を入力" %>
+      </div>
+
+      <!-- カテゴリ -->
+      <div>
+        <%= f.label :category_id, "カテゴリ", class: "block text-sm font-bold mb-2" %>
+        <%= f.select :category_id, 
+            @categories.map { |c| [c.name, c.id] }, 
+            { prompt: "カテゴリを選択してください" }, 
+            class: "w-full px-3 py-2 border border-gray-300 rounded-lg" %>
+      </div>
+
+      <!-- 評価 -->
+      <div>
+        <%= f.label :rating, "評価", class: "block text-sm font-bold mb-2" %>
+        <%= f.select :rating, 
+            (1..5).map { |i| ["★" * i, i] }, 
+            { prompt: "評価を選択してください" }, 
+            class: "w-full px-3 py-2 border border-gray-300 rounded-lg" %>
+      </div>
+
+      <!-- コメント -->
+      <div>
+        <%= f.label :comment, "メモ", class: "block text-sm font-bold mb-2" %>
+        <%= f.text_area :comment, rows: 4, class: "w-full px-3 py-2 border border-gray-300 rounded-lg", placeholder: "メモを入力" %>
+      </div>
+
+      <!-- 送信ボタン -->
+      <div class="flex gap-4">
+        <%= f.submit "作成", class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg" %>
+        <%= link_to "キャンセル", products_path, class: "bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-6 rounded-lg" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- カテゴリ横スクロール -->
+  <div class="mb-6">
+    <h2 class="text-2xl font-bold mb-4">カテゴリで絞り込み</h2>
+    <div class="flex gap-2 overflow-x-auto pb-2">
+      <%= link_to "全て", products_path, class: "px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg whitespace-nowrap" %>
+      <% @categories.each do |category| %>
+        <%= link_to category.name, 
+            products_path(category_id: category.id), 
+            class: "px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg whitespace-nowrap #{'bg-blue-500 text-white' if params[:category_id] == category.id.to_s}" %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- メモ一覧 -->
+  <div class="product-list-section">
+    <h2 class="text-2xl font-bold mb-4">メモ一覧</h2>
+    <div id="product-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <% if @products.any? %>
+        <% @products.each do |product| %>
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <h3 class="text-xl font-bold mb-2"><%= product.name %></h3>
+            <p class="text-sm text-gray-600 mb-1">カテゴリー: <%= product.category.name %></p>
+            <p class="text-sm text-gray-600 mb-1">評価: <%= '★' * product.rating.to_i %><%= '☆' * (5 - product.rating.to_i) %></p>
+            <p class="text-sm text-gray-600 mb-3">メモ: <%= product.comment %></p>
+            <div class="flex gap-2">
+              <%= link_to '詳細', product_path(product), class: 'text-blue-500 hover:underline text-sm' %>
+              <%= link_to '編集', edit_product_path(product), class: 'text-yellow-500 hover:underline text-sm' %>
+              <%= link_to '削除', product_path(product), method: :delete, 
+                  data: { confirm: '本当に削除しますか?' }, class: 'text-red-500 hover:underline text-sm' %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="col-span-full text-center text-gray-500">商品が登録されていません</p>
+      <% end %>
+    </div>
+  </div>
+</div>
