@@ -1,50 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GraduationProject</title>
+    <title>簡単整理メモアプリ</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>  <!-- ← inter-font を削除 -->
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body>
-    <%= render 'shared/header' %>
+    <!-- ログイン画面とユーザー登録画面では専用のヘッダーを表示 -->
+    <% if controller_name == 'user_sessions' || (controller_name == 'users' && action_name == 'new') %>
+      <%= render 'shared/auth_header' %>
+    <% else %>
+      <%= render 'shared/header' %>
+    <% end %>
     
+    <!-- フラッシュメッセージ -->
     <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>">
-        <%= message %>
+      <div class="container mx-auto px-4 mt-4">
+        <div class="alert alert-<%= message_type %> bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded">
+          <%= message %>
+        </div>
       </div>
     <% end %>
 
     <%= yield %>
-
-    <script>
-  // Turbo Frame にコンテンツが読み込まれたらモーダルを表示
-  // document.addEventListener('turbo:frame-load', function(event) {
-  //   if (event.target.id === 'modal') {
-  //     const modalContainer = event.target;
-  //     if (modalContainer && modalContainer.innerHTML.trim() !== '') {
-  //       modalContainer.classList.remove('hidden');
-  //       modalContainer.classList.add('flex');
-  //     }
-  //   }
-  // });
-
-  // 背景クリックでモーダルを閉じる
-  // document.addEventListener('click', function(event) {
-  //   const modal = document.querySelector('turbo-frame#modal');
-  //   if (modal && event.target === modal) {
-  //     modal.classList.add('hidden');
-  //     modal.classList.remove('flex');
-  //     // モーダルの中身を空にする
-  //     modal.innerHTML = '<div class="bg-white rounded-lg shadow-lg max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto"></div>';
-  //   }
-  // });
-  </script>
   </body>
 </html>
-

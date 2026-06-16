@@ -1,104 +1,112 @@
 <div class="container mx-auto px-4 py-8">
-  <h1 class="text-3xl font-bold mb-6">メモ管理アプリ</h1>
-
-  <!-- メモ作成フォーム -->
-  <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-    <h2 class="text-2xl font-bold mb-4">メモを作成</h2>
-    
-    <%= form_with model: @product, url: products_path, local: true, class: "space-y-4" do |f| %>
-      
-      <!-- エラーメッセージ -->
-      <% if @product.errors.any? %>
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-          <ul>
-            <% @product.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-      <!-- 商品名 -->
-      <div>
-        <%= f.label :name, "商品名", class: "block text-sm font-bold mb-2" %>
-        <%= f.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded-lg", placeholder: "商品名を入力" %>
-      </div>
-
-      <!-- カテゴリ -->
-      <div>
-        <%= f.label :category_id, "カテゴリ", class: "block text-sm font-bold mb-2" %>
-        <%= f.select :category_id, 
-            @categories.map { |c| [c.name, c.id] }, 
-            { prompt: "カテゴリを選択してください" }, 
-            class: "w-full px-3 py-2 border border-gray-300 rounded-lg" %>
-      </div>
-
-      <!-- 評価 -->
-      <div>
-        <%= f.label :rating, "評価", class: "block text-sm font-bold mb-2" %>
-        <%= f.select :rating, 
-            (1..5).map { |i| ["★" * i, i] }, 
-            { prompt: "評価を選択してください" }, 
-            class: "w-full px-3 py-2 border border-gray-300 rounded-lg" %>
-      </div>
-
-      <!-- コメント -->
-      <div>
-        <%= f.label :comment, "メモ", class: "block text-sm font-bold mb-2" %>
-        <%= f.text_area :comment, rows: 4, class: "w-full px-3 py-2 border border-gray-300 rounded-lg", placeholder: "メモを入力" %>
-      </div>
-
-      <!-- 送信ボタン -->
-      <div>
-        <%= f.submit "作成", class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg" %>
-      </div>
-    <% end %>
+  <!-- ヘッダー -->
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold mb-4">簡単整理メモアプリ</h1>
   </div>
 
-  <!-- カテゴリ横スクロール -->
+  <!-- 並べ替えボタン -->
   <div class="mb-6">
-    <h2 class="text-2xl font-bold mb-4">カテゴリで絞り込み</h2>
-    <div class="flex gap-2 overflow-x-auto pb-2">
-      <%= link_to "全て", root_path, class: "px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg whitespace-nowrap" %>
+    <div class="flex gap-3 flex-wrap">
+      <%= link_to '評価高い順', products_path(sort: 'rating', category_id: params[:category_id]), 
+          class: "px-6 py-2 rounded-lg transition #{params[:sort] == 'rating' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}" %>
+      <%= link_to 'カテゴリ順', products_path(sort: 'category', category_id: params[:category_id]), 
+          class: "px-6 py-2 rounded-lg transition #{params[:sort] == 'category' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}" %>
+    </div>
+  </div>
+
+  <!-- カテゴリ絞り込み -->
+  <div class="mb-6">
+    <div class="flex gap-3 flex-wrap">
+      <%= link_to 'すべて', products_path(sort: params[:sort]), 
+          class: "px-4 py-2 rounded-lg transition #{params[:category_id].blank? ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}" %>
       <% @categories.each do |category| %>
-        <%= link_to category.name, 
-            root_path(category_id: category.id), 
-            class: "px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg whitespace-nowrap #{'bg-blue-500 text-white' if params[:category_id] == category.id.to_s}" %>
+        <%= link_to category.name, products_path(category_id: category.id, sort: params[:sort]), 
+            class: "px-4 py-2 rounded-lg transition #{params[:category_id].to_i == category.id ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}" %>
       <% end %>
     </div>
   </div>
 
-  <!-- メモ一覧 -->
-<div class="mb-6">
-  <h2 class="text-2xl font-bold mb-4">メモ一覧</h2>
-</div>
+  <!-- ここから順序を入れ替え -->
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  <% if @products.any? %>
-    <% @products.each do |product| %>
-      <div id="product-<%= product.id %>" class="bg-white p-4 rounded-lg shadow-md">
-        <h3 class="text-xl font-bold mb-2"><%= product.name %></h3>
-        <p class="text-sm text-gray-600 mb-1">カテゴリー: <%= product.category.name %></p>
-        <p class="text-sm text-gray-600 mb-1">評価: <%= '★' * product.rating.to_i %><%= '☆' * (5 - product.rating.to_i) %></p>
-        <p class="text-sm text-gray-600 mb-3">メモ: <%= product.comment %></p>
-        <div class="flex gap-2">
-          <%= link_to '編集', edit_product_path(product), 
-              data: { turbo_frame: "modal" }, 
-              class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" %>
-          <%= link_to '削除', product_path(product), 
-              data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, 
-              class: 'text-red-500 hover:underline text-sm' %>
+  <!-- メモ一覧（上に移動） -->
+  <div class="mb-6">
+    <h2 class="text-2xl font-bold mb-4">メモ一覧</h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+    <% if @products.any? %>
+      <% @products.each do |product| %>
+        <div id="product-<%= product.id %>" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition">
+          <h3 class="text-xl font-bold mb-2"><%= product.name %></h3>
+          <p class="text-sm text-gray-600 mb-1">
+            <span class="font-semibold">カテゴリー:</span> <%= product.category.name %>
+          </p>
+          <p class="text-sm text-gray-600 mb-1">
+            <span class="font-semibold">評価:</span> 
+            <span class="text-yellow-500"><%= '★' * product.rating.to_i %></span>
+            <span class="text-gray-300"><%= '☆' * (5 - product.rating.to_i) %></span>
+          </p>
+          <p class="text-sm text-gray-700 mb-3">
+            <span class="font-semibold">メモ:</span> <%= product.comment %>
+          </p>
+          <div class="flex gap-2">
+            <%= link_to '編集', edit_product_path(product), 
+                data: { turbo_frame: "modal" }, 
+                class: "px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition" %>
+            <%= link_to '削除', product_path(product), 
+                data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, 
+                class: "px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition" %>
+          </div>
         </div>
+      <% end %>
+    <% else %>
+      <p class="col-span-full text-center text-gray-500 py-8">メモが登録されていません</p>
+    <% end %>
+  </div>
+
+  <!-- メモ作成フォーム（下に移動） -->
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+    <h2 class="text-2xl font-bold mb-4">メモ作成</h2>
+    <%= form_with model: @product, url: products_path, method: :post, local: true, class: "space-y-4" do |f| %>
+      <!-- 名前 -->
+      <div>
+        <%= f.label :name, "名前", class: "block text-sm font-bold mb-2" %>
+        <%= f.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder: "名前を入力" %>
+      </div>
+
+      <!-- カテゴリ -->
+      <div>
+        <%= f.label :category_id, "カテゴリー", class: "block text-sm font-bold mb-2" %>
+        <%= f.collection_select :category_id, @categories, :id, :name, 
+            { prompt: "選択してください" }, 
+            { class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" } %>
+      </div>
+
+  
+       <!-- 評価 -->
+      <div>
+        <%= f.label :rating, "評価", class: "block text-sm font-bold mb-2" %>
+        <%= f.select :rating, (1..5).map { |i| ["★" * i, i] }, 
+            { prompt: "選択してください" }, 
+            { class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" } %>
+      </div>
+
+      <!-- メモ -->
+      <div>
+        <%= f.label :comment, "メモ", class: "block text-sm font-bold mb-2" %>
+        <%= f.text_area :comment, rows: 4, 
+            class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", 
+            placeholder: "メモを入力" %>
+      </div>
+
+      <!-- 登録ボタン -->
+      <div>
+        <%= f.submit "登録", class: "w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition cursor-pointer" %>
       </div>
     <% end %>
-  <% else %>
-    <p class="col-span-full text-center text-gray-500">メモが登録されていません</p>
-  <% end %>
-</div>
+  </div>
 
-<!-- モーダル -->
-<div id="modal-container">
-  <%= turbo_frame_tag "modal" do %>
-  <% end %>
-</div>
+  <!-- Turbo Frame Modal -->
+  <%= turbo_frame_tag "modal" %>
+</div>       
 

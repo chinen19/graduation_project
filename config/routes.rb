@@ -11,8 +11,7 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
 
-  resources :expenses
-  resources :products
+  resources :products, only: [:index, :new, :create, :edit, :update, :show, :destroy]
   resources :categories, only: [:index]
 
   # ユーザー登録
