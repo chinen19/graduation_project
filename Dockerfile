@@ -15,4 +15,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["sh", "-c", "bundle exec rails db:migrate RAILS_ENV=production && bundle exec puma -C config/puma.rb"]
