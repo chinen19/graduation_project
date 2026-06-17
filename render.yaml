@@ -1,7 +1,6 @@
 services:
   - type: web
     name: graduation-project-15-q76n
-    preDeployCommand: bundle exec rails db:migrate
     env: ruby
     buildCommand: "bundle install && rails db:migrate && rails assets:precompile"
     startCommand: "bundle exec puma -C config/puma.rb"
@@ -12,6 +11,7 @@ services:
         fromDatabase:
           name: graduation-project-15-q76n-db
           property: connectionString
+
 
 # databases:
   # - name: graduation-project-15-q76n-db
