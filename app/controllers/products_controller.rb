@@ -52,18 +52,22 @@ class ProductsController < ApplicationController
 
   def create
     @product = current_user.products.build(product_params)
-  
+
     if @product.save
       respond_to do |format|
-        format.html { redirect_to root_path, notice: 'メモを作成しました' }
+        format.html { redirect_to products_path, notice: 'メモを作成しました' }
         format.turbo_stream
       end
     else
-      @products = current_user.products.includes(:category).order(created_at: :desc)
-      @categories = Category.all
       respond_to do |format|
         format.html { render :index, status: :unprocessable_entity }
-        format.turbo_stream { render :index, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "new-product-form",
+            partial: "products/form",
+            locals: { product: @product }
+          ), status: :unprocessable_entity
+        end
       end
     end
   end
