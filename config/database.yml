@@ -15,19 +15,28 @@
 # gem "pg"
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  adapter: mysql2
+  encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV.fetch('DATABASE_HOST', 'db') %>
-  username: <%= ENV.fetch('DATABASE_USERNAME', 'postgres') %>
-  password: <%= ENV.fetch('DATABASE_PASSWORD', 'password') %>
-
+  username: root
+  password: password
+  host: db
 
 development:
   <<: *default
-  database: app_development
+  database: v3_basic_rails_basic_development
+
+test:
+  <<: *default
+  database: v3_basic_rails_basic_test
+
+# production環境の設定
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV['DATABASE_URL'] %>
+
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
