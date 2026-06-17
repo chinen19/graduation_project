@@ -15,27 +15,23 @@
 # gem "pg"
 #
 default: &default
-  adapter: mysql2
-  encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: password
-  host: db
-
-development:
-  <<: *default
-  database: v3_basic_rails_basic_development
-
-test:
-  <<: *default
-  database: v3_basic_rails_basic_test
-
-# production環境の設定
-production:
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: graduation_project_production
+  host: db
+  username: <%= ENV.fetch("POSTGRES_USER") { "postgres" } %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { "password" } %>
+
+development:
+  <<: *default
+  database: graduation_project_development
+
+test:
+  <<: *default
+  database: graduation_project_test
+
+production:
+  <<: *default
   url: <%= ENV['DATABASE_URL'] %>
 
 

@@ -1,39 +1,31 @@
 services:
   db:
-    image: postgres:17 
-    restart: always
+    image: postgres:17
     environment:
-      TZ: Asia/Tokyo
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: app_development
     volumes:
-      - postgresql_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d app_development -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
 
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile  # ← 現在の Dockerfile を使う
-    command: bash -c "bundle install && bundle exec rails db:prepare && rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
-    tty: true
-    stdin_open: true
+    build: .
+    command: bundle exec rails s -b '0.0.0.0'
     volumes:
       - .:/app
-      - bundle_data:/usr/local/bundle:cached
-    environment:
-      TZ: Asia/Tokyo
     ports:
       - "3000:3000"
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/graduation_project_development
 
 volumes:
-  bundle_data:
-  postgresql_data:
+  postgres_data:
