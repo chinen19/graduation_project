@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :require_login
+  # before_action :require_login
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_categories, only: [:new, :create, :edit, :update, :index]
 
