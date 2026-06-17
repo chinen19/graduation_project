@@ -26,7 +26,6 @@
     </div>
   </div>
 
-
   <!-- メモ一覧（上に移動） -->
   <div class="mb-6">
     <h2 class="text-2xl font-bold mb-4">メモ一覧</h2>
@@ -41,7 +40,7 @@
             <span class="font-semibold">カテゴリー:</span> <%= product.category.name %>
           </p>
           <p class="text-sm text-gray-600 mb-1">
-            <span class="font-semibold">評価:</span> 
+            <span class="font-semibold">評価:</span>
             <span class="text-yellow-500"><%= '★' * product.rating.to_i %></span>
             <span class="text-gray-300"><%= '☆' * (5 - product.rating.to_i) %></span>
           </p>
@@ -50,10 +49,10 @@
           </p>
           <div class="flex gap-2">
             <%= link_to '編集', edit_product_path(product), 
-                data: { turbo_frame: "modal" }, 
+                data: { turbo_frame: "modal" },
                 class: "px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition" %>
             <%= link_to '削除', product_path(product), 
-                data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, 
+                data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' },
                 class: "px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition" %>
           </div>
         </div>
@@ -69,39 +68,7 @@
     <%= render "form", product: @product %>
   </div>
 
-      <!-- カテゴリ -->
-      <div>
-        <%= f.label :category_id, "カテゴリー", class: "block text-sm font-bold mb-2" %>
-        <%= f.collection_select :category_id, @categories, :id, :name, 
-            { prompt: "選択してください" }, 
-            { class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" } %>
-      </div>
-
-  
-       <!-- 評価 -->
-      <div>
-        <%= f.label :rating, "評価", class: "block text-sm font-bold mb-2" %>
-        <%= f.select :rating, (1..5).map { |i| ["★" * i, i] }, 
-            { prompt: "選択してください" }, 
-            { class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" } %>
-      </div>
-
-      <!-- メモ -->
-      <div>
-        <%= f.label :comment, "メモ", class: "block text-sm font-bold mb-2" %>
-        <%= f.text_area :comment, rows: 4, 
-            class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", 
-            placeholder: "メモを入力" %>
-      </div>
-
-      <!-- 登録ボタン -->
-      <div>
-        <%= f.submit "登録", class: "w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition cursor-pointer" %>
-      </div>
-    <% end %>
-  </div>
-
   <!-- Turbo Frame Modal -->
   <%= turbo_frame_tag "modal" %>
-</div>       
+</div>
 
