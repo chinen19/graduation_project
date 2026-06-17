@@ -61,11 +61,12 @@ if Rails.env.production?
   
   # デモユーザーのメモを作成
   puts "Creating demo products..."
-  demo_memos = [
-    { name: '買い物リスト', comment: '牛乳、卵、パンを買う', rating: 3, category_name: 'プライベート' },
-    { name: 'プロジェクトメモ', comment: 'MVPリリースの準備', rating: 5, category_name: '仕事' },
-    { name: 'Ruby学習', comment: 'Railsのアソシエーションを復習', rating: 4, category_name: '勉強' }
-  ]
+ demo_memos = [
+  { name: '買い物リスト', comment: '牛乳、卵、パンを買う', rating: 3, category_name: '食品' },
+  { name: 'プロジェクトメモ', comment: 'MVPリリースの準備', rating: 5, category_name: 'その他' },
+  { name: 'Ruby学習', comment: 'Railsのアソシエーションを復習', rating: 4, category_name: 'その他' }
+ ]
+
   
   demo_memos.each do |memo_data|
     category = Category.find_by(name: memo_data[:category_name])
