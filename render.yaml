@@ -1,18 +1,22 @@
 services:
   - type: web
-    name: graduation-project-web
+    name: graduation-project-15-q76n
     env: ruby
-    plan: free
-    buildCommand: bundle install; bundle exec rails assets:precompile; bundle exec rails db:migrate
-    startCommand: bundle exec rails server -b 0.0.0.0 -p $PORT
+    buildCommand: "bundle install && rails db:migrate && rails assets:precompile"
+    startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: RAILS_MASTER_KEY
         sync: false
-        value: abe1f21da6da69cd67532762aa341c5b
       - key: DATABASE_URL
-        value: postgresql://graduation_project_production_nhbd_user:okOzSzVMrtYRxYYn9qcco9IFQToJA7TL@dpg-d8mcklgjs32c73cgtuvg-a/graduation_project_production_nhbd
-      - key: RAILS_ENV
-        value: production
+        fromDatabase:
+          name: graduation-project-15-q76n-db
+          property: connectionString
+
+databases:
+  - name: graduation-project-15-q76n-db
+    databaseName: graduation_project_production
+    user: graduation_project_user
+
 
 # databases セクションはコメントアウト
 # databases:
