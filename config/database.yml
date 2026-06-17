@@ -35,6 +35,7 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: graduation_project_production
   url: <%= ENV['DATABASE_URL'] %>
 
 
@@ -92,7 +93,4 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-production:
-  <<: *default
-  database: graduation_project_production
-  url: <%= ENV['DATABASE_URL'] %>
+
