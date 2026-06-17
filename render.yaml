@@ -13,7 +13,6 @@ services:
           property: connectionString
 
 
-
 # databases:
   # - name: graduation-project-15-q76n-db
    #  databaseName: graduation_project_production
