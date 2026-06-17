@@ -49,6 +49,9 @@ gem "bootsnap", require: false
 
 gem 'sorcery', '0.16.3'
 
+gem 'draper'
+
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
