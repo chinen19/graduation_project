@@ -52,14 +52,19 @@ class ProductsController < ApplicationController
 
   def create
     @product = current_user.products.build(product_params)
-    
+  
     if @product.save
-      redirect_to root_path, notice: 'メモを作成しました'
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: 'メモを作成しました' }
+        format.turbo_stream
+      end
     else
-      # エラー時は index を再表示
       @products = current_user.products.includes(:category).order(created_at: :desc)
       @categories = Category.all
-      render :index, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :index, status: :unprocessable_entity }
+        format.turbo_stream { render :index, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -33,7 +33,7 @@
     <h2 class="text-2xl font-bold mb-4">メモ一覧</h2>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+  <div id="products-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
     <% if @products.any? %>
       <% @products.each do |product| %>
         <div id="product-<%= product.id %>" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition">
@@ -67,7 +67,7 @@
   <!-- メモ作成フォーム（下に移動） -->
   <div class="bg-white rounded-lg shadow-md p-6 mb-8">
     <h2 class="text-2xl font-bold mb-4">メモ作成</h2>
-    <%= form_with model: @product, url: products_path, method: :post, local: true, class: "space-y-4" do |f| %>
+    <%= form_with model: @product, url: products_path, method: :post, id: "new-product-form", class: "space-y-4" do |f| %>
       <!-- 名前 -->
       <div>
         <%= f.label :name, "名前", class: "block text-sm font-bold mb-2" %>

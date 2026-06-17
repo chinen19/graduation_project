@@ -1,0 +1,63 @@
+<%= turbo_stream.prepend "products-list" do %>
+  <div id="product-<%= @product.id %>" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition">
+    <h3 class="text-xl font-bold mb-2"><%= @product.name %></h3>
+    <p class="text-sm text-gray-600 mb-1">
+      <span class="font-semibold">カテゴリー:</span> <%= @product.category.name %>
+    </p>
+    <p class="text-sm text-gray-600 mb-1">
+      <span class="font-semibold">評価:</span> 
+      <span class="text-yellow-500"><%= '★' * @product.rating.to_i %></span>
+      <span class="text-gray-300"><%= '☆' * (5 - @product.rating.to_i) %></span>
+    </p>
+    <p class="text-sm text-gray-700 mb-3">
+      <span class="font-semibold">メモ:</span> <%= @product.comment %>
+    </p>
+    <div class="flex gap-2">
+      <%= link_to '編集', edit_product_path(@product), 
+          data: { turbo_frame: "modal" }, 
+          class: "px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition" %>
+      <%= link_to '削除', product_path(@product), 
+          data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか?' }, 
+          class: "px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition" %>
+    </div>
+  </div>
+<% end %>
+
+<%= turbo_stream.replace "new-product-form" do %>
+  <%= form_with model: Product.new, url: products_path, method: :post, id: "new-product-form", class: "space-y-4" do |f| %>
+    <!-- 名前 -->
+    <div>
+      <%= f.label :name, "名前", class: "block text-sm font-bold mb-2" %>
+      <%= f.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder: "名前を入力" %>
+    </div>
+
+    <!-- カテゴリ -->
+    <div>
+      <%= f.label :category_id, "カテゴリー", class: "block text-sm font-bold mb-2" %>
+      <%= f.collection_select :category_id, Category.all, :id, :name, 
+          { prompt: "選択してください" }, 
+          { class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" } %>
+    </div>
+
+    <!-- 評価 -->
+    <div>
+      <%= f.label :rating, "評価", class: "block text-sm font-bold mb-2" %>
+      <%= f.select :rating, (1..5).map { |i| ["★" * i, i] }, 
+          { prompt: "選択してください" }, 
+          { class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" } %>
+    </div>
+
+    <!-- メモ -->
+    <div>
+      <%= f.label :comment, "メモ", class: "block text-sm font-bold mb-2" %>
+      <%= f.text_area :comment, rows: 4, 
+          class: "w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", 
+          placeholder: "メモを入力" %>
+    </div>
+
+    <!-- 登録ボタン -->
+    <div>
+      <%= f.submit "登録", class: "w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition cursor-pointer" %>
+    </div>
+  <% end %>
+<% end %>
