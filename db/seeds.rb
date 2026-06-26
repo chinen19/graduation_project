@@ -6,15 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 # 固定カテゴリの作成
-categories = ['食品', 'ストック品', '薬', '洋服', '雑貨', 'その他']
-
-categories.each do |category_name|
-  Category.find_or_create_by(name: category_name)
-end
-
-puts "固定カテゴリを作成しました!"
-
-# 既存データのクリーンアップ（開発環境のみ）
+# 既存データのクリーンアップ(開発環境のみ)
 if Rails.env.development?
   puts "Cleaning up existing data..."
   Product.destroy_all
@@ -39,18 +31,18 @@ user = User.find_or_create_by!(email: 'test@example.com') do |u|
 end
 puts "Test user created: #{user.email}"
 
-# テストメモの作成
+# テスト商品の作成
 puts "Creating test products..."
 5.times do |i|
-  Product.find_or_create_by!(name: "テストメモ#{i + 1}", user: user) do |p|
-    p.comment = "これはテストメモ#{i + 1}です。メモの内容をここに記載します。"
+  Product.find_or_create_by!(name: "テスト商品#{i + 1}", user: user) do |p|
+    p.comment = "これはテスト商品#{i + 1}です。商品の説明をここに記載します。"
     p.rating = rand(1..5)
     p.category = Category.all.sample
   end
 end
 puts "Test products created: #{Product.count}"
 
-# デモユーザーの作成（本番環境用）
+# デモユーザーの作成(本番環境用)
 if Rails.env.production?
   puts "Creating demo user..."
   demo_user = User.find_or_create_by!(email: 'demo@example.com') do |u|
@@ -59,20 +51,19 @@ if Rails.env.production?
     u.password_confirmation = 'demodemo'
   end
   
-  # デモユーザーのメモを作成
+  # デモユーザーの商品を作成
   puts "Creating demo products..."
- demo_memos = [
-  { name: '買い物リスト', comment: '牛乳、卵、パンを買う', rating: 3, category_name: '食品' },
-  { name: 'プロジェクトメモ', comment: 'MVPリリースの準備', rating: 5, category_name: 'その他' },
-  { name: 'Ruby学習', comment: 'Railsのアソシエーションを復習', rating: 4, category_name: 'その他' }
- ]
-
+  demo_products = [
+    { name: '買い物リスト', comment: '牛乳、卵、パンを買う', rating: 3, category_name: '食品' },
+    { name: 'プロジェクトメモ', comment: 'MVPリリースの準備', rating: 5, category_name: 'その他' },
+    { name: 'Ruby学習', comment: 'Railsのアソシエーションを復習', rating: 4, category_name: 'その他' }
+  ]
   
-  demo_memos.each do |memo_data|
-    category = Category.find_by(name: memo_data[:category_name])
-    Product.find_or_create_by!(name: memo_data[:name], user: demo_user) do |p|
-      p.comment = memo_data[:comment]
-      p.rating = memo_data[:rating]
+  demo_products.each do |product_data|
+    category = Category.find_by(name: product_data[:category_name])
+    Product.find_or_create_by!(name: product_data[:name], user: demo_user) do |p|
+      p.comment = product_data[:comment]
+      p.rating = product_data[:rating]
       p.category = category
     end
   end

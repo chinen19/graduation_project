@@ -1,0 +1,16 @@
+<footer class="bg-gray-100 text-gray-600 py-4 mt-auto">
+  <div class="container mx-auto px-4">
+    <!-- flex-col md:flex-row でスマホでは縦並び、PCでは横並びにするメソッド -->
+    <!-- リンク -->
+    <nav class="flex flex-col md:flex-row justify-center items-center gap-3 md:gap-6 mb-4">
+      <%= link_to '利用規約', terms_path, class: 'text-gray-600 hover:text-blue-500' %>
+      <%= link_to 'プライバシーポリシー', privacy_path, class: 'text-gray-600 hover:text-blue-500' %>
+      <%= link_to '使い方', how_to_use_path, class: 'text-gray-600 hover:text-blue-500' %>
+    </nav>
+    
+    <!-- 著作権表示 -->
+    <p class="text-center text-xs md:text-sm text-gray-400">
+      © 2026 簡単整理メモアプリ. All rights reserved.
+    </p>
+  </div>
+</footer>
