@@ -17,4 +17,9 @@ Rails.application.routes.draw do
   # ユーザー登録
   resources :users, only: [:new, :create]
 
+  # 静的ページのルーティングを追加
+  get 'terms', to: 'static_pages#terms'
+  get 'privacy', to: 'static_pages#privacy'
+  get 'how_to_use', to: 'static_pages#guide'
+
 end

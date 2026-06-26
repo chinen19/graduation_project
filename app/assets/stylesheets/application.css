@@ -161,3 +161,49 @@ header nav a:first-child {
  *= require_tree .
  *= require_self
  */
+
+ /* body全体をFlexboxにして、フッターを最下部に配置 */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* メインコンテンツを伸縮可能にする */
+main {
+  flex: 1;
+}
+
+/* フッターのスタイル */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+}
+
+/* 静的ページのスタイル */
+.prose {
+  color: #333;
+  line-height: 1.8;
+}
+
+.prose h2 {
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 8px;
+}
+
+.prose ul {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.prose ul li {
+  margin-bottom: 8px;
+}
