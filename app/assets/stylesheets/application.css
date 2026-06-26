@@ -1,18 +1,4 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+@import "tailwindcss";
 
 /* カテゴリの横スクロール */
 .category-scroll {
@@ -40,6 +26,7 @@
   background-color: #007bff;
   color: white;
 }
+
 /* フラッシュメッセージのスタイル */
 .alert {
   padding: 15px;
@@ -63,10 +50,10 @@
 
 /* ヘッダーのスタイル */
 header {
-  background-color: #808080; /* 灰色 */
+  background-color: #808080;
   padding: 15px;
   margin-bottom: 20px;
-  border-radius: 8px; /* 角を丸くする */
+  border-radius: 8px;
 }
 
 header nav {
@@ -75,7 +62,6 @@ header nav {
   align-items: center;
 }
 
-/* リンクやテキストの色を白に設定（灰色背景に合わせて） */
 header nav a {
   color: white;
   text-decoration: none;
@@ -91,7 +77,6 @@ header nav span {
   margin-right: 15px;
 }
 
-/* アプリ名を少し大きく太字に */
 header nav a:first-child {
   font-size: 1.5rem;
   font-weight: bold;
@@ -157,12 +142,7 @@ header nav a:first-child {
   background-color: #0056b3;
 }
 
-/*
- *= require_tree .
- *= require_self
- */
-
- /* body全体をFlexboxにして、フッターを最下部に配置 */
+/* body全体をFlexboxにして、フッターを最下部に配置 */
 html, body {
   height: 100%;
   margin: 0;
@@ -206,4 +186,91 @@ footer {
 
 .prose ul li {
   margin-bottom: 8px;
+}
+
+/* ヘッダー */
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .logo {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.header .logo a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header .logo a:hover {
+  opacity: 0.8;
+}
+
+.header .nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.header .nav-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.header .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* フッター */
+.footer {
+  background-color: #f5f5f5;
+  padding: 2rem 0;
+  margin-top: auto;
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.footer .footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.footer .footer-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer .footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer .copyright {
+  color: #999;
+  font-size: 0.8rem;
 }
