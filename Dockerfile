@@ -19,7 +19,7 @@ RUN gem install bundler && bundle install
 # アプリケーションのコードをコピー
 COPY . .
 
-# アセットのプリコンパイル
+# アセットプリコンパイル
 RUN RAILS_ENV=production SECRET_KEY_BASE=dummy bundle exec rails assets:precompile
 
 # Start script を作成

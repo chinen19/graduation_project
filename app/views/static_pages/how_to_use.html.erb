@@ -1,0 +1,58 @@
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">使い方ガイド</h1>
+
+  <!-- セクション1: アプリの概要 -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4">このアプリについて</h2>
+    <p class="text-gray-600 leading-relaxed">
+      本サービスは、日常生活で試したい商品や良かった商品を簡単に記録・整理できるメモアプリです。<br>
+      カテゴリ選択・メモ一覧・メモ作成が一画面で完結できます。
+      カテゴリ順・評価高い順に並べ替えできます。
+    </p>
+  </section>
+
+  <!-- セクション2: 基本的な使い方 -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4">基本的な使い方</h2>
+    
+    <!-- ステップ1: アカウント登録 -->
+    <div class="mb-6">
+      <h3 class="text-xl font-semibold text-gray-600 mb-2">1. アカウント登録・ログイン</h3>
+      <p class="text-gray-600 leading-relaxed mb-2">
+        まずは、右上の「新規登録」ボタンからアカウントを作成してください。<br>
+        ユーザー名とメールアドレス、パスワードを入力するだけで、すぐに始められます。
+      </p>
+    </div>
+
+    <!-- ステップ2: メモの作成 -->
+    <div class="mb-6">
+      <h3 class="text-xl font-semibold text-gray-600 mb-2">2. メモを作成する</h3>
+      <p class="text-gray-600 leading-relaxed mb-2">
+        カテゴリ選択・メモ一覧・メモ作成が一画面です。ログイン後、下にスクロースすると、「メモ作成」一覧があるので、商品名・カテゴリー、評価、メモを入力してください。<br>
+        カテゴリーは固定です。
+        登録ボタンを押すと、メモが一覧に追加されます。
+      </p>
+    </div>
+
+    <!-- ステップ3: メモの編集・削除 -->
+    <div class="mb-6">
+      <h3 class="text-xl font-semibold text-gray-600 mb-2">3. メモを編集・削除する</h3>
+      <p class="text-gray-600 leading-relaxed mb-2">
+        メモの一覧から「編集」ボタンをクリックして、内容を変更できます。<br>
+        不要になったメモは「削除」ボタンで削除できます。
+      </p>
+    </div>
+
+    <!-- ステップ4: 並べ替え -->
+    <div class="mb-6">
+      <h3 class="text-xl font-semibold text-gray-600 mb-2">4. メモを整理する</h3>
+      <p class="text-gray-600 leading-relaxed mb-2">
+        カテゴリ順・評価高い順に並べ替えし、整理することができます。<br>
+      </p>
+    </div>
+  </section>
+  <!-- 戻るボタン -->
+  <div class="text-center mt-8">
+    <%= link_to 'トップページに戻る', root_path, class: 'btn-primary' %>
+  </div>
+</div>

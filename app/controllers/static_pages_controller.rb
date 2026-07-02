@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  skip_before_action :require_login, only: %i[top terms privacy guide]
+  skip_before_action :require_login, only: %i[top terms privacy how_to_use]
 
   def top
   end
@@ -10,6 +10,6 @@ class StaticPagesController < ApplicationController
   def privacy
   end
 
-  def guide
+  def how_to_use
   end
 end

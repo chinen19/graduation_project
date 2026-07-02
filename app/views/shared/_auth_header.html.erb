@@ -1,15 +1,15 @@
 <header class="bg-gray-50 shadow-sm border-b border-gray-200">
-  <nav class="container mx-auto px-4 py-4">
+  <nav class="max-w-7xl mx-auto px-4 py-4">
     <div class="flex items-center justify-between">
       <!-- 左側: アプリ名 -->
-      <div class="flex items-center">
         <h1 class="text-2xl font-bold text-gray-800">
           簡単整理メモアプリ
         </h1>
       </div>
 
       <!-- 右側: ログイン/新規登録リンク -->
-      <div class="flex items-center space-x-4">
+      <!-- スマホ表示: space-x-4 (16px),PC表示: space-x-8 (32px),ml-autoは要素を右端に寄せる -->
+      <div class="flex items-center space-x-10 md:space-x-10 ml-auto">
         <% if controller_name == 'user_sessions' %>
           <span class="text-gray-600">アカウントをお持ちでない方</span>
           <%= link_to "新規登録", new_user_path, class: "bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200" %>

@@ -5,15 +5,19 @@
     <h1 class="text-xl md:text-2xl font-bold">
       <%= link_to '簡単整理アプリ', root_path,  class: 'text-white hover:text-blue-200' %>
     </h1>
-    
+
      <!-- ユーザーがログインしているかどうか」を判定するメソッド -->
      <!-- gap-2 md:gap-4 でスマホでは狭い間隔、PCでは広い間隔にするメソッド -->
     <nav class="flex flex-col md:flex-row md:items-center gap-3 md:gap-4 mt-3 md:mt-0">
-      <% if logged_in? %>
+    <!-- デバッグ用 -->
+    <p>ログイン状態: <%= logged_in? %></p>
+    
+    <% if logged_in? %>
         <span class="text-sm md:text-base">ようこそ、<%= current_user.user_name %>さん!</span>
         <!-- text-sm md:text-base でスマホでは小さめの文字、PCでは通常サイズにするメソッド -->
         <%= link_to 'ログアウト', logout_path, data: { turbo_method: :delete }, class:  "text-white hover:text-blue-200 text-sm md:text-base" %>
-      <% else %>
+      <% elsif controller_name != 'static_pages' || action_name != 'top' %>
+      <!-- トップ画面以外では「ログイン」「新規登録」を表示 -->
         <%= link_to 'ログイン', login_path, class:  "text-white hover:text-blue-200 text-sm md:text-base" %>
         <%= link_to '新規登録', new_user_path, class:  "text-white hover:text-blue-200 text-sm md:text-base" %>
       <% end %>
