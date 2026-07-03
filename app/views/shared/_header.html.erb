@@ -1,27 +1,21 @@
-<header class="bg-blue-500 text-white p-3 md:p-4 shadow-md">
-  <div class="container mx-auto">
-    <!-- flex-col md:flex-row でスマホでは縦並び、PCでは横並びにするメソッド -->
-    <div class="flex flex-col md:flex-row md:justify-between md:items-center">
-    <h1 class="text-xl md:text-2xl font-bold">
-      <%= link_to '簡単整理アプリ', root_path,  class: 'text-white hover:text-blue-200' %>
-    </h1>
+<header class="bg-blue-500 text-white p-1 md:p-4 shadow-md">
+  <div class="container mx-auto px-1">
+    <div class="flex flex-row justify-between items-center">
+      <h1 class="text-[11px] md:text-2xl font-bold">
+        <%= link_to '簡単整理アプリ', root_path, class: 'text-white hover:text-blue-200' %>
+      </h1>
 
-     <!-- ユーザーがログインしているかどうか」を判定するメソッド -->
-     <!-- gap-2 md:gap-4 でスマホでは狭い間隔、PCでは広い間隔にするメソッド -->
-    <nav class="flex flex-col md:flex-row md:items-center gap-3 md:gap-4 mt-3 md:mt-0">
-    <!-- デバッグ用 -->
-    <p>ログイン状態: <%= logged_in? %></p>
-    
-    <% if logged_in? %>
-        <span class="text-sm md:text-base">ようこそ、<%= current_user.user_name %>さん!</span>
-        <!-- text-sm md:text-base でスマホでは小さめの文字、PCでは通常サイズにするメソッド -->
-        <%= link_to 'ログアウト', logout_path, data: { turbo_method: :delete }, class:  "text-white hover:text-blue-200 text-sm md:text-base" %>
-      <% elsif controller_name != 'static_pages' || action_name != 'top' %>
-      <!-- トップ画面以外では「ログイン」「新規登録」を表示 -->
-        <%= link_to 'ログイン', login_path, class:  "text-white hover:text-blue-200 text-sm md:text-base" %>
-        <%= link_to '新規登録', new_user_path, class:  "text-white hover:text-blue-200 text-sm md:text-base" %>
-      <% end %>
-    </nav>
+      <nav class="flex flex-row items-center gap-1 md:gap-4">
+        <% if logged_in? %>
+          <span class="text-[11px] md:text-base"><%= current_user.user_name.truncate(4, omission: '..') %>さん</span>
+          <%= button_to 'ログアウト', logout_path, method: :delete, 
+              class: "text-white hover:text-blue-200 text-[9px] md:text-base whitespace-nowrap bg-transparent border-none cursor-pointer p-0 inline",
+              form_class: "inline" %>
+        <% elsif controller_name != 'static_pages' || action_name != 'top' %>
+          <%= link_to 'ログイン', login_path, class: "text-white hover:text-blue-200 text-[9px] md:text-base whitespace-nowrap" %>
+          <%= link_to '新規登録', new_user_path, class: "text-white hover:text-blue-200 text-[9px] md:text-base whitespace-nowrap" %>
+        <% end %>
+      </nav>
+    </div>
   </div>
- </div>
 </header>
