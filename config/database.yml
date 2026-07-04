@@ -34,6 +34,7 @@ test:
   database: graduation_project_test
 
 production:
+  <<: *default
   url: <%= ENV['DATABASE_URL'] %>
 
 
