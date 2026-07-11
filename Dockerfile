@@ -25,6 +25,9 @@ RUN yarn install
 # アプリケーションのコードをコピー
 COPY . .
 
+# Tailwind CSS のビルドを実行
+RUN yarn build:css
+
 # アセットプリコンパイル
 RUN RAILS_ENV=production SECRET_KEY_BASE=dummy bundle exec rails assets:precompile
 
