@@ -16,6 +16,12 @@ COPY Gemfile Gemfile.lock ./
 # Bundler のインストールと gem のインストール
 RUN gem install bundler && bundle install
 
+# package.json と yarn.lock をコピー
+COPY package.json yarn.lock ./
+
+# Node.js の依存関係をインストール
+RUN yarn install
+
 # アプリケーションのコードをコピー
 COPY . .
 
