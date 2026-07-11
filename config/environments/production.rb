@@ -37,6 +37,9 @@ Rails.application.configure do
   # アセットのコンパイルを有効化
   config.assets.compile = false
 
+  # アセットのプリコンパイルリストに tailwind.css
+  config.assets.precompile += %w[tailwind.css]
+
   # ホストを許可（Renderのホスト名を追加）
   # ※ 後でRenderで設定するアプリ名に合わせて変更します
   config.hosts << ".onrender.com"
