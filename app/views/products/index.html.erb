@@ -26,12 +26,13 @@
     </div>
   </div>
 
-  <!-- メモ一覧（上に移動） -->
+  <!-- メモ一覧 -->
   <div class="mb-6">
     <h2 class="text-2xl font-bold mb-4">メモ一覧</h2>
   </div>
 
-  <div id="products-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+  <div class="mb-8 overflow-y-auto p-5 border border-gray-300 rounded-lg bg-gray-50" style="max-height: 400px;">
+  <div id="products-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <% if @products.any? %>
       <% @products.each do |product| %>
         <div id="product-<%= product.id %>" class="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition">
@@ -61,8 +62,9 @@
       <p class="col-span-full text-center text-gray-500 py-8">メモが登録されていません</p>
     <% end %>
   </div>
+  </div>
 
-  <!-- メモ作成フォーム（下に移動） -->
+  <!-- メモ作成フォーム -->
   <div class="bg-white rounded-lg shadow-md p-6 mb-8">
     <h2 class="text-2xl font-bold mb-4">メモ作成</h2>
     <%= render "form", product: @product %>

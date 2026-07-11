@@ -17,30 +17,35 @@ end
 # カテゴリの作成
 puts "Creating categories..."
 categories_data = ['食品', 'ストック品', '薬', '洋服', '雑貨', 'その他']
-categories_data.each do |name|
+created_categories = categories_data.map do |name|
   Category.find_or_create_by!(name: name)
 end
 puts "Categories created: #{Category.count}"
 
 # テストユーザーの作成
 puts "Creating test user..."
-user = User.find_or_create_by!(email: 'test@example.com') do |u|
-  u.user_name = 'testuser'
-  u.password = 'password'
-  u.password_confirmation = 'password'
+user = User.find_or_create_by!(email: 'test3@example.com') do |u|
+  u.user_name = 'testuser3'
+  u.password = 'password123'
+  u.password_confirmation = 'password123'
 end
 puts "Test user created: #{user.email}"
 
-# テスト商品の作成
+# テストメモの作成（30件に変更）
 puts "Creating test products..."
-5.times do |i|
-  Product.find_or_create_by!(name: "テスト商品#{i + 1}", user: user) do |p|
-    p.comment = "これはテスト商品#{i + 1}です。商品の説明をここに記載します。"
-    p.rating = rand(1..5)
-    p.category = Category.all.sample
-  end
+
+30.times do |i|
+  Product.create!(
+    name: "テストメモ #{i + 1}",
+    comment: "これはテストメモ #{i + 1} の内容です。スクロール機能を確認するために作成されました。",
+    category: created_categories.sample,  # ランダムにカテゴリを選択
+    rating: rand(1..5),
+    user: user
+  )
 end
+
 puts "Test products created: #{Product.count}"
+
 
 # デモユーザーの作成(本番環境用)
 if Rails.env.production?
@@ -70,6 +75,7 @@ if Rails.env.production?
   puts "Demo products created: #{demo_user.products.count}"
 end
 
+# 作成されたデータの確認
 puts "Seed data created successfully!"
 puts "=" * 50
 puts "Users: #{User.count}"

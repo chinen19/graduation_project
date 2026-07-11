@@ -3,7 +3,6 @@ class User < ApplicationRecord
   # Sorceryの認証機能をこのモデルで有効にするための宣言
 
   # アソシエーション
-  has_many :expenses, dependent: :destroy
   has_many :products, dependent: :destroy
 
   validates :user_name, presence: true, uniqueness: true, length: { maximum: 255 }

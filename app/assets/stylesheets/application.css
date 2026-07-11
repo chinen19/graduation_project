@@ -159,6 +159,49 @@ main {
   flex: 1;
 }
 
+/* メモ一覧のスクロール */
+.products-container {
+  max-height: 400px !important; 
+  overflow-y: auto !important; 
+  padding: 20px !important; 
+  border: 1px solid #ddd !important;
+  border-radius: 8px !important;
+  background-color: #f9f9f9 !important;
+}
+
+/* メモカードのスタイル */
+.product-card {
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: white;
+  transition: box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* スクロールバーのカスタマイズ（オプション） */
+.products-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.products-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.products-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.products-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 /* フッターのスタイル */
 footer {
   background-color: #333;
