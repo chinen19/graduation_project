@@ -1,5 +1,3 @@
-@import "tailwindcss";
-
 /* カテゴリの横スクロール */
 .category-scroll {
   display: flex;
