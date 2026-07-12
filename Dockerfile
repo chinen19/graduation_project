@@ -28,8 +28,8 @@ COPY . .
 # Tailwind CSS のビルドを実行
 RUN yarn build:css
 
-# アセットプリコンパイル
-RUN RAILS_ENV=production SECRET_KEY_BASE=dummy bundle exec rails assets:precompile
+# アセットプリコンパイル (エラーの詳細を表示)
+RUN RAILS_ENV=production SECRET_KEY_BASE=dummy bundle exec rails assets:precompile --trace
 
 # Start script を作成
 RUN echo '#!/bin/bash\n\
