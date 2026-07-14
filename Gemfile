@@ -1,7 +1,3 @@
-
-
-
-
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -34,7 +30,6 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem "tailwindcss-rails"
-
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
