@@ -36,6 +36,10 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
+  # SSL接続の設定を追加
+  sslmode: require
+  # SSL証明書の検証をスキップ
+  sslrootcert: /dev/null
 
 
   # The specified database role being used to connect to postgres.
