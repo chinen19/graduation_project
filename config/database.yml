@@ -36,7 +36,10 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  sslmode: require
+  sslmode: require
+  sslrootcert: system
 
 
   # The specified database role being used to connect to postgres.
