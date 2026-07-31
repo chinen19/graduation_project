@@ -15,25 +15,25 @@
 # gem "pg"
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  adapter: postgresql # 使用するデータベース種類
+  encoding: unicode # 文字コード
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %> # コネクションプーリングで使用するコネクションの上限
 
-development:
+development: # 開発用
   <<: *default
   host: db
   username: <%= ENV.fetch("POSTGRES_USER") { "postgres" } %>
   password: <%= ENV.fetch("POSTGRES_PASSWORD") { "password" } %>
-  database: graduation_project_development
+  database: myapp_development
 
-test:
+test: # テスト用
   <<: *default
   host: db
   username: <%= ENV.fetch("POSTGRES_USER") { "postgres" } %>
   password: <%= ENV.fetch("POSTGRES_PASSWORD") { "password" } %>
   database: graduation_project_test
 
-production:
+production: # 本番用
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>

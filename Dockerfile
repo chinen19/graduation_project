@@ -13,7 +13,7 @@ WORKDIR /app
 # Gemfile と Gemfile.lock をコピー
 COPY Gemfile Gemfile.lock ./
 
-# Bundler のインストールと gem のインストール
+# コピー元とコピー先を指定。Bundler のインストールと gem のインストール
 RUN gem install bundler && bundle install
 
 # package.json と yarn.lock をコピー
