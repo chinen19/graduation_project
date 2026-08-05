@@ -42,6 +42,7 @@ production: # 本番用
   checkout_timeout: 10
   variables:
     statement_timeout: 15000
+  sslmode: require
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
