@@ -40,6 +40,8 @@ production: # 本番用
   timeout: 5000
   connect_timeout: 10
   checkout_timeout: 10
+  variables:
+    statement_timeout: 15000
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
