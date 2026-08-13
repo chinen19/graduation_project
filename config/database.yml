@@ -36,12 +36,7 @@ test: # テスト用
 production: # 本番用
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  pool: 5
-  timeout: 5000
-  connect_timeout: 20
-  checkout_timeout: 20
-  variables:
-    statement_timeout: 30000
+  
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
