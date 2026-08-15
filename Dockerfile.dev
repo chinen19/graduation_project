@@ -1,5 +1,7 @@
+# 「開発環境」用に最適化されたDockerfile
 # syntax=docker/dockerfile:1
-FROM ruby:3.2.2
+FROM ruby:3.2.2 
+#Rubyのベースイメージを指定
 
 # 必要なパッケージをインストール
 RUN apt-get update -qq && \

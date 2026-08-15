@@ -1,7 +1,7 @@
 
-services:
-  db:
-    image: postgres:17
+services: # コンテナの定義開始
+  db: # PostgreSQLデータベースの設定
+    image: postgres:17 # PostgreSQLの公式イメージを使用
     restart: always
     environment:
       TZ: Asia/Tokyo

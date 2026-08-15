@@ -16,7 +16,7 @@ gem "sprockets-rails"
 gem "puma", ">= 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "pg", "~> 1.5", group: :production
+gem "pg", "~> 1.5", group: :production # PostgreSQLが使えるようになる
 
 gem "importmap-rails"
 
