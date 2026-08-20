@@ -30,6 +30,9 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# 環境変数
+.env # 全ての環境
+
 # Tailwind CSS のビルドファイルは Render でのデプロイに必要なのでコミットする
 # /app/assets/builds/*
 # !/app/assets/builds/.keep

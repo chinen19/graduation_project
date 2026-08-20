@@ -21,7 +21,9 @@ services: # コンテナの定義開始
   web:
     build:
       context: .
-      dockerfile: Dockerfile.dev  # ← 開発環境用のDockerfileを指定
+      dockerfile: Dockerfile.dev  # 開発環境用のDockerfileを指定
+    env_file:
+      - .env  # .env ファイルを読み込む
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     tty: true
     stdin_open: true

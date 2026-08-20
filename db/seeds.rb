@@ -18,7 +18,7 @@ end
 puts "Creating categories..."
 categories_data = ['食品', 'ストック品', '薬', '洋服', '雑貨', 'その他']
 created_categories = categories_data.map do |name|
-  Category.find_or_create_by!(name: name)
+  Category.find_or_create_by!(name: name) # find_or_create_by!で何度実行しても重複しない
 end
 puts "Categories created: #{Category.count}"
 
