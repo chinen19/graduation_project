@@ -1,19 +1,24 @@
-<header class="bg-blue-500 text-white p-1 md:p-4 shadow-md">
-  <div class="container mx-auto px-1">
+<header class="bg-blue-500 text-white p-2 md:p-4 shadow-md">
+  <div class="container mx-auto px-2 md:px-4">
     <div class="flex flex-row justify-between items-center">
-      <h1 class="text-[11px] md:text-2xl font-bold">
+      <!-- ロゴ：スマホでは text-lg、タブレット以上では text-2xl -->
+      <h1 class="text-lg md:text-2xl font-bold">
         <%= link_to '簡単整理アプリ', root_path, class: 'text-white hover:text-blue-200' %>
       </h1>
 
-      <nav class="flex flex-row items-center gap-1 md:gap-4">
+      <nav class="flex flex-row items-center gap-2 md:gap-4">
         <% if logged_in? %>
-          <span class="text-[11px] md:text-base"><%= current_user.user_name.truncate(4, omission: '..') %>さん</span>
-          <%= button_to 'ログアウト', logout_path, method: :delete, 
-              class: "text-white hover:text-blue-200 text-[9px] md:text-base whitespace-nowrap bg-transparent border-none cursor-pointer p-0 inline",
+          <!-- ユーザー名：スマホでは text-sm、タブレット以上では text-base -->
+          <span class="text-sm md:text-base"><%= current_user.user_name.truncate(6, omission: '..') %>さん</span>
+          
+          <!-- ログアウトボタン：スマホでは text-sm、タブレット以上では text-base -->
+          <%= link_to 'ログアウト', logout_path, method: :delete, 
+              class: "text-white hover:text-blue-200 text-sm md:text-base whitespace-nowrap bg-transparent border-none cursor-pointer p-0 inline",
               form_class: "inline" %>
         <% elsif controller_name != 'static_pages' || action_name != 'top' %>
-          <%= link_to 'ログイン', login_path, class: "text-white hover:text-blue-200 text-[9px] md:text-base whitespace-nowrap" %>
-          <%= link_to '新規登録', new_user_path, class: "text-white hover:text-blue-200 text-[9px] md:text-base whitespace-nowrap" %>
+          <!-- リンク：スマホでは text-sm、タブレット以上では text-base -->
+          <%= link_to 'ログイン', login_path, class: "text-white hover:text-blue-200 text-sm md:text-base whitespace-nowrap" %>
+          <%= link_to '新規登録', new_user_path, class: "text-white hover:text-blue-200 text-sm md:text-base whitespace-nowrap" %>
         <% end %>
       </nav>
     </div>
