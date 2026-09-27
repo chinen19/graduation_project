@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   validates :user_name, presence: true, uniqueness: true, length: { maximum: 255 }
   # ユーザー名の存在チェックと重複禁止
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true,: { case_sensitive: false }
 # パスワードのバリデーション
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
